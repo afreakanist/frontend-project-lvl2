@@ -1,4 +1,8 @@
 #!/usr/bin/env node
-import hello from '../gendiff';
+import program from 'commander';
 
-hello();
+program
+  .description('Compares two configuration files and shows the difference.')
+  .version('1.0.0');
+
+program.parse(process.argv);

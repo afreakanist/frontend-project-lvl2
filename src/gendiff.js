@@ -1,1 +1,1 @@
-export default () => console.log("Hi, there! Test-shmest!");
+export default () => console.log('Hi there! Test-shmest!');
