@@ -2,7 +2,7 @@
   "name": "project2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/afreakanist/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^4.1.1"
+    "commander": "^4.1.1",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
