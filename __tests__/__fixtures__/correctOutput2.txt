@@ -1,0 +1,7 @@
+{
+  + name: Hermione Granger
+  - name: Harry Potter
+    age: 37
+  - job: Auror
+  + education: Hogwarts
+}
