@@ -1,6 +1,6 @@
 {
-  + name: Hermione Granger
-  - name: Harry Potter
+  + name: Hermione Jean Granger
+  - name: Harry James Potter
     age: 37
   - job: Auror
   + education: Hogwarts

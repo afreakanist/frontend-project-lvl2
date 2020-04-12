@@ -26,5 +26,5 @@ export default (first, second) => {
     return acc;
   };
 
-  return `{\n${keys.map(compareData).join('\n')}\n}`;
+  return `{\n${keys.map(compareData).join('\n')}\n}\n`;
 };
