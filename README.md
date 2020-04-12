@@ -10,4 +10,5 @@ Hello, everyone! This is my new practice project. It is a command line utility f
 
 [![asciicast](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8.svg)](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8)
 
+[![asciicast](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd.svg)](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd)
 
