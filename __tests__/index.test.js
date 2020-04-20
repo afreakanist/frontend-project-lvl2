@@ -1,9 +1,9 @@
 import fs from 'fs';
 import gendiff from '../src/index';
 
-const correctOutput = fs.readFileSync('__tests__/__fixtures__/correctOutput.txt', 'utf-8');
-const correctOutput2 = fs.readFileSync('__tests__/__fixtures__/correctOutput2.txt', 'utf-8');
-const correctOutput3 = fs.readFileSync('__tests__/__fixtures__/correctOutput3.txt', 'utf-8');
+const correctOutput = fs.readFileSync('__tests__/__fixtures__/correctOutput.txt', 'utf-8').trim();
+const correctOutput2 = fs.readFileSync('__tests__/__fixtures__/correctOutput2.txt', 'utf-8').trim();
+const correctOutput3 = fs.readFileSync('__tests__/__fixtures__/correctOutput3.txt', 'utf-8').trim();
 
 describe('flat json comparison', () => {
   const first = '__tests__/__fixtures__/flatObject1.json';
