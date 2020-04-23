@@ -1,0 +1,9 @@
+{
+  "name": "Harry Potter",
+  "age": 14,
+  "education": {
+    "school": "Hogwarts",
+    "house": "Gryffindor"
+  }, 
+  "allignment": "good"
+}

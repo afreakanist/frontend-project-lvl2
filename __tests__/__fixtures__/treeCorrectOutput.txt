@@ -1,0 +1,12 @@
+{
+  + name: Cedric Diggory
+  - name: Harry Potter
+  - age: 14
+    education: {
+    school: Hogwarts
+  + house: Hufflepuff
+  - house: Gryffindor
+}
+    allignment: good
+  + sex: male
+}

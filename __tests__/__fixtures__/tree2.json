@@ -1,0 +1,9 @@
+{
+  "name": "Cedric Diggory",
+  "sex": "male",
+  "education": {
+    "school": "Hogwarts",
+    "house": "Hufflepuff"
+  }, 
+  "allignment": "good"
+}

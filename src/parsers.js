@@ -1,16 +1,19 @@
-import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (filepath) => {
-  if (path.extname(filepath) === '.json') {
-    return JSON.parse(fs.readFileSync(path.resolve(filepath), 'utf8'));
+export default (filepath1, filepath2) => {
+  if (path.extname(filepath1) === path.extname(filepath2)) {
+    if (path.extname(filepath1) === '.json') {
+      return JSON.parse;
+    }
+    if (path.extname(filepath1) === '.yml') {
+      return yaml.safeLoad;
+    }
+    if (path.extname(filepath1) === '.ini') {
+      return ini.parse;
+    }
   }
-  if (path.extname(filepath) === '.yml') {
-    return yaml.safeLoad(fs.readFileSync(path.resolve(filepath), 'utf8'));
-  }
-  if (path.extname(filepath) === '.ini') {
-    return ini.parse(fs.readFileSync(path.resolve(filepath), 'utf-8'));
-  }
+
+  return undefined;
 };
