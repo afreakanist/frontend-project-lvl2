@@ -2,18 +2,12 @@ import path from 'path';
 import yaml from 'js-yaml';
 import ini from 'ini';
 
-export default (filepath1, filepath2) => {
-  if (path.extname(filepath1) === path.extname(filepath2)) {
-    if (path.extname(filepath1) === '.json') {
-      return JSON.parse;
-    }
-    if (path.extname(filepath1) === '.yml') {
-      return yaml.safeLoad;
-    }
-    if (path.extname(filepath1) === '.ini') {
-      return ini.parse;
-    }
+export default (filepath) => {
+  if (path.extname(filepath) === '.yml') {
+    return yaml.safeLoad;
   }
-
-  return undefined;
+  if (path.extname(filepath) === '.ini') {
+    return ini.parse;
+  }
+  return JSON.parse;
 };
