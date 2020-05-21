@@ -1,24 +1,18 @@
 import fs from 'fs';
+import path from 'path';
 import gendiff from '../src';
 
-const fixturesPath = '__tests__/__fixtures__/';
-const complex = fs.readFileSync('__tests__/__fixtures__/complex.txt', 'utf-8').trim();
-const json = fs.readFileSync('__tests__/__fixtures__/json.txt', 'utf-8').trim();
-const plain = fs.readFileSync('__tests__/__fixtures__/plain.txt', 'utf-8').trim();
+const fileFormats = ['ini', 'json', 'yml'];
+const outputFormats = ['complex', 'json', 'plain'];
 
-describe('tree comparison', () => {
-  const first = `${fixturesPath}before.json`;
-  const second = `${fixturesPath}after.json`;
+const argSets = outputFormats.map((outputFormat) => (
+  fileFormats.map((fileFormat) => [fileFormat, outputFormat])
+)).flat(); // ?!
 
-  test('complex output', () => {
-    expect(gendiff(first, second)).toEqual(complex);
-  });
-
-  test('JSON output', () => {
-    expect(gendiff(first, second, 'json')).toEqual(json);
-  });
-
-  test('plain output', () => {
-    expect(gendiff(first, second, 'plain')).toEqual(plain);
-  });
+test.each(argSets)('show difference between %s files in %s format', (fileFormat, outputFormat) => {
+  const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+  const before = getFixturePath(`before.${fileFormat}`);
+  const after = getFixturePath(`after.${fileFormat}`);
+  const correctOutput = fs.readFileSync(getFixturePath(outputFormat), 'utf-8');
+  expect(gendiff(before, after, outputFormat)).toEqual(correctOutput);
 });
