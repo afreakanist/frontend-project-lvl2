@@ -1,40 +1,19 @@
 const step = 2;
 const getIndent = (depth) => '  '.repeat(step * depth);
 
+const getIndentWithSign = (type, depth) => {
+  const arr = getIndent(depth).split('');
+  arr[arr.length - 2] = (type === 'added') ? '+' : '-';
+  return arr.join('');
+};
+
 const formats = {
-  added: ({ key, value }, depth) => {
-    const getIndentForAdded = () => {
-      const arr = getIndent(depth).split('');
-      arr[arr.length - 2] = '+';
-      return arr.join('');
-    };
-    return `${getIndentForAdded()}${key}: ${value}`;
-  },
-  deleted: ({ key, value }, depth) => {
-    const getIndentForDeleted = () => {
-      const arr = getIndent(depth).split('');
-      arr[arr.length - 2] = '-';
-      return arr.join('');
-    };
-    return `${getIndentForDeleted()}${key}: ${value}`;
-  },
+  added: ({ key, value }, depth) => `${getIndentWithSign('added', depth)}${key}: ${value}`,
+  deleted: ({ key, value }, depth) => `${getIndentWithSign('deleted', depth)}${key}: ${value}`,
   same: ({ key, value }, depth) => `${getIndent(depth)}${key}: ${value}`,
-  changed: ({ key, value1, value2 }, depth) => {
-    const getIndentForDeleted = () => {
-      const arr = getIndent(depth).split('');
-      arr[arr.length - 2] = '-';
-      return arr.join('');
-    };
-    const getIndentForAdded = () => {
-      const arr = getIndent(depth).split('');
-      arr[arr.length - 2] = '+';
-      return arr.join('');
-    };
-    return `${getIndentForDeleted()}${key}: ${value1}\n${getIndentForAdded()}${key}: ${value2}`;
-  },
+  changed: ({ key, value1, value2 }, depth) => `${getIndentWithSign('deleted', depth)}${key}: ${value1}\n${getIndentWithSign('added', depth)}${key}: ${value2}`, // одно из значений -- объект => ?
   nested: ({ key, children }, depth, func) => {
-    const nestedDepth = depth + 1;
-    const value = ['{', func(children, nestedDepth), '}'].join('\n');
+    const value = ['{', func(children, depth + 1), `${getIndent(depth)}}`].join('\n');
     return `${getIndent(depth)}${key}: ${value}`;
   },
 };
