@@ -6,9 +6,5 @@ Hello, everyone! This is my new practice project. It is a command line utility f
 
 #### Here are some videos demonstrating how to run this utility
 
-[![asciicast](https://asciinema.org/a/N5c01gq47h6QOEUtSB2QAD5qy.svg)](https://asciinema.org/a/N5c01gq47h6QOEUtSB2QAD5qy)
-
-[![asciicast](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8.svg)](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8)
-
-[![asciicast](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd.svg)](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd)
+[![asciicast](https://asciinema.org/a/N5c01gq47h6QOEUtSB2QAD5qy.svg)](https://asciinema.org/a/N5c01gq47h6QOEUtSB2QAD5qy) [![asciicast](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8.svg)](https://asciinema.org/a/sYSmXPHTZnTRZmN5e53dDLAY8) [![asciicast](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd.svg)](https://asciinema.org/a/h1UelcKDKzRobzZ2JjUXXBjsd)
 
