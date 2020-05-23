@@ -12,14 +12,15 @@ const formats = {
   deleted: ({ key }) => `Property '${key}' was deleted`,
   same: () => null,
   changed: ({ key, value1, value2 }) => `Property '${key}' was changed from ${getValue(value1)} to ${getValue(value2)}`,
-  nested: ({ key, children }, func) => func(children, key), // ?
+  nested: ({ key, children }, func) => func(children, key),
 };
 
-const render = (data) => data.map((el) => {
-  const { type } = el; // ?
+const render = (data, ...keys) => data.map((el) => {
+  const { key, type } = el;
   const getOutput = formats[type];
+  const currKey = [...keys, key].join('.');
 
-  return getOutput(el, render); // ?
+  return getOutput({ ...el, key: currKey }, render);
 }).filter((el) => el !== null).join('\n');
 
 export default render;
