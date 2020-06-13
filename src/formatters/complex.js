@@ -1,20 +1,35 @@
 const step = 2;
-const getIndent = (depth) => '  '.repeat(step * depth);
+const getIndent = (depth) => ' '.repeat(step * depth);
 
-const getIndentWithSign = (type, depth) => {
-  const arr = getIndent(depth).split('');
-  arr[arr.length - 2] = (type === 'added') ? '+' : '-';
-  return arr.join('');
+const getString = (key, value, depth) => {
+  const startIndent = getIndent(depth);
+  const endIndent = getIndent(depth + 1);
+  if (!(value instanceof Object)) {
+    return [getIndent(depth), `${key}: ${value}`].join('');
+  }
+
+  const complexValue = Object.entries(value).map(([currKey, currValue]) => {
+    if (currValue instanceof Object) {
+      return getString(currKey, currValue, depth + 3);
+    }
+
+    const currStartIndent = getIndent(depth + 3);
+    return [currStartIndent, `${currKey}: ${currValue}`].join('');
+  }).join('\n');
+
+  return [`${startIndent}${key}: {`, complexValue, `${endIndent}}`].join('\n');
 };
 
 const formats = {
-  added: ({ key, value }, depth) => `${getIndentWithSign('added', depth)}${key}: ${value}`,
-  deleted: ({ key, value }, depth) => `${getIndentWithSign('deleted', depth)}${key}: ${value}`,
-  same: ({ key, value }, depth) => `${getIndent(depth)}${key}: ${value}`,
-  changed: ({ key, value1, value2 }, depth) => `${getIndentWithSign('deleted', depth)}${key}: ${value1}\n${getIndentWithSign('added', depth)}${key}: ${value2}`, // одно из значений -- объект => ?
+  added: ({ key, value }, depth) => getString(`+ ${key}`, value, depth),
+  deleted: ({ key, value }, depth) => getString(`- ${key}`, value, depth),
+  same: ({ key, value }, depth) => getString(`  ${key}`, value, depth),
+  changed: ({ key, value1, value2 }, depth) => (
+    [getString(`- ${key}`, value1, depth), getString(`+ ${key}`, value2, depth)].join('\n')
+  ),
   nested: ({ key, children }, depth, func) => {
-    const value = ['{', func(children, depth + 1), `${getIndent(depth)}}`].join('\n');
-    return `${getIndent(depth)}${key}: ${value}`;
+    const value = ['{', func(children, depth + 2), `${getIndent(depth + 1)}}`].join('\n');
+    return getString(`  ${key}`, value, depth);
   },
 };
 
