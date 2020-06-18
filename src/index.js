@@ -2,15 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parsers';
 import compareData from './compareData';
-import formatter from './formatters/main';
+import getOutput from './formatters/index';
+
+const getType = (filepath) => path.extname(filepath).slice(1);
 
 const getContent = (filepath) => fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf8');
 
-export default (file1, file2, format = 'complex') => {
-  const obj1 = parse(file1)(getContent(file1));
-  const obj2 = parse(file2)(getContent(file2));
+export default (filepath1, filepath2, format = 'complex') => {
+  const obj1 = parse(getType(filepath1))(getContent(filepath1));
+  const obj2 = parse(getType(filepath2))(getContent(filepath2));
 
   const difference = compareData(obj1, obj2);
 
-  return formatter(difference, format);
+  return getOutput(difference, format);
 };
