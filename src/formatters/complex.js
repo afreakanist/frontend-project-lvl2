@@ -1,19 +1,20 @@
-const step = 2;
-const getIndent = (depth) => ' '.repeat(step * depth);
+const indentStep = 4;
+const getIndent = (depth) => ' '.repeat(depth * indentStep);
+const getSignIndent = (depth) => ' '.repeat(depth * indentStep - 2);
 
-const getString = (key, value, depth) => {
-  const startIndent = getIndent(depth);
-  const endIndent = getIndent(depth + 1);
+const stringify = (key, value, depth) => {
+  const startIndent = getSignIndent(depth);
+  const endIndent = getIndent(depth);
   if (!(value instanceof Object)) {
-    return [getIndent(depth), `${key}: ${value}`].join('');
+    return [getSignIndent(depth), `${key}: ${value}`].join('');
   }
 
   const complexValue = Object.entries(value).map(([currKey, currValue]) => {
     if (currValue instanceof Object) {
-      return getString(currKey, currValue, depth + 3);
+      return stringify(currKey, currValue, depth + 1);
     }
 
-    const currStartIndent = getIndent(depth + 3);
+    const currStartIndent = getIndent(depth + 1);
     return [currStartIndent, `${currKey}: ${currValue}`].join('');
   }).join('\n');
 
@@ -21,15 +22,15 @@ const getString = (key, value, depth) => {
 };
 
 const formats = {
-  added: ({ key, value }, depth) => getString(`+ ${key}`, value, depth),
-  deleted: ({ key, value }, depth) => getString(`- ${key}`, value, depth),
-  same: ({ key, value }, depth) => getString(`  ${key}`, value, depth),
+  added: ({ key, value }, depth) => stringify(`+ ${key}`, value, depth),
+  deleted: ({ key, value }, depth) => stringify(`- ${key}`, value, depth),
+  same: ({ key, value }, depth) => stringify(`  ${key}`, value, depth),
   changed: ({ key, value1, value2 }, depth) => (
-    [getString(`- ${key}`, value1, depth), getString(`+ ${key}`, value2, depth)].join('\n')
+    [stringify(`- ${key}`, value1, depth), stringify(`+ ${key}`, value2, depth)].join('\n')
   ),
   nested: ({ key, children }, depth, func) => {
-    const value = ['{', func(children, depth + 2), `${getIndent(depth + 1)}}`].join('\n');
-    return getString(`  ${key}`, value, depth);
+    const value = ['{', func(children, depth + 1), `${getIndent(depth)}}`].join('\n');
+    return stringify(`  ${key}`, value, depth);
   },
 };
 
